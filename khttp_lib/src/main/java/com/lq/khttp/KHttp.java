@@ -32,6 +32,7 @@ public class KHttp {
         KHttp.baseUrl = baseUrl;
     }
 
+
     private static Retrofit generateRetrofit() {
         return RetrofitManager.getInstance().getBuilder().build();
     }
