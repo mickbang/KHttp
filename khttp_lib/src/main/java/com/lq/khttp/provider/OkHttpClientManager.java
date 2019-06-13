@@ -37,7 +37,7 @@ public class OkHttpClientManager {
         mHttpClientBuilder = new OkHttpClient.Builder();
 
         //缓存
-        File cacheFile = new File(KHttp.sContext.getCacheDir(), HTTP_CACHE_PATH);
+        File cacheFile = new File(KHttp.getContext().getCacheDir(), HTTP_CACHE_PATH);
         //创建缓存目录
         createFile(cacheFile);
         Cache cache = new Cache(cacheFile, CACHE_SIZE);

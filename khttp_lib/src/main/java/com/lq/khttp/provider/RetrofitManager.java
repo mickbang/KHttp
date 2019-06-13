@@ -1,7 +1,5 @@
 package com.lq.khttp.provider;
 
-import android.text.TextUtils;
-
 import com.google.gson.GsonBuilder;
 import com.lq.khttp.KHttp;
 
@@ -22,9 +20,6 @@ public class RetrofitManager {
     private Retrofit.Builder mBuilder;
 
     private RetrofitManager() {
-        if (TextUtils.isEmpty(KHttp.baseUrl)) {
-            throw new ExceptionInInitializerError("必须先调用KHttp.init初始化");
-        }
 
         generateBuilder();
     }
@@ -39,7 +34,7 @@ public class RetrofitManager {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(OkHttpClientManager.getInstance().getHttpClientBuilder().build())
-                .baseUrl(KHttp.baseUrl);
+                .baseUrl(KHttp.getBaseUrl());
     }
 
     public static RetrofitManager getInstance() {

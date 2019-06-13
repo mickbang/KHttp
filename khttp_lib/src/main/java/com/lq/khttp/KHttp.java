@@ -1,6 +1,7 @@
 package com.lq.khttp;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.lq.khttp.api.ApiService;
 import com.lq.khttp.provider.RetrofitManager;
@@ -22,8 +23,8 @@ import retrofit2.Retrofit;
  */
 @SuppressWarnings({"unused"})
 public class KHttp {
-    public static String baseUrl = "";
-    public static Context sContext;
+    private static String baseUrl = "";
+    private static Context sContext;
 
 
     public static void init(Context context, String baseUrl) {
@@ -40,6 +41,21 @@ public class KHttp {
         return generateRetrofit().create(service);
     }
 
+
+    public static Context getContext() {
+        if (sContext == null) {
+            throw new ExceptionInInitializerError("必须先调用KHttp.init初始化");
+        }
+
+        return sContext;
+    }
+
+    public static String getBaseUrl() {
+        if (TextUtils.isEmpty(baseUrl)) {
+            throw new ExceptionInInitializerError("必须先调用KHttp.init初始化");
+        }
+        return baseUrl == null ? "" : baseUrl;
+    }
 
     /**
      * 简单参数的post请求

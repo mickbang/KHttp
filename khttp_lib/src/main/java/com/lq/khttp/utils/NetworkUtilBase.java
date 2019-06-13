@@ -12,7 +12,7 @@ public class NetworkUtilBase {
     /*获取网络连接状态*/
     public static NetState getNetState() {
         NetState stateCode = NetState.NET_NO;
-        ConnectivityManager cm = (ConnectivityManager) KHttp.sContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) KHttp.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         if (ni != null && ni.isConnectedOrConnecting()) {
             switch (ni.getType()) {
@@ -171,7 +171,7 @@ public class NetworkUtilBase {
      * 功能: 网络连接的状态
      */
     public static boolean isConnected() {
-        ConnectivityManager cm = (ConnectivityManager) KHttp.sContext
+        ConnectivityManager cm = (ConnectivityManager) KHttp.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (null != cm) {
             NetworkInfo info = cm.getActiveNetworkInfo();
