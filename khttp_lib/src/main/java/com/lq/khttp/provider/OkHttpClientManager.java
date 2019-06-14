@@ -53,7 +53,7 @@ public class OkHttpClientManager {
                 //没网络时的拦截器
                 .addInterceptor(CacheInterceptor.REWRITE_RESPONSE_INTERCEPTOR_OFFLINE)
                 //日志拦截器
-                .addInterceptor(new HttpLoggingInterceptor(HttpLog.DEFAULT_LOG_TAG))
+                .addInterceptor(new HttpLoggingInterceptor(HttpLog.DEFAULT_LOG_TAG).setLevel(HttpLoggingInterceptor.Level.BODY))
 //                //统一添加请求头
 //                .addInterceptor(InterceptorUtils.getResponseHeader())
                 //缓存目录和大小

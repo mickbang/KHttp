@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.lq.khttp.api.ApiService;
 import com.lq.khttp.provider.RetrofitManager;
+import com.lq.khttp.request.GetRequest;
 import com.lq.khttp.transformer.HttpSchedulersTransformer;
 
 import java.util.Map;
@@ -36,12 +37,6 @@ public class KHttp {
     private static Retrofit generateRetrofit() {
         return RetrofitManager.getInstance().getBuilder().build();
     }
-
-
-    public <T> T createApi(Class<T> service) {
-        return generateRetrofit().create(service);
-    }
-
 
     public static Context getContext() {
         if (sContext == null) {
@@ -79,9 +74,9 @@ public class KHttp {
      * @return
      */
     public static Observable<ResponseBody> get(String url, Map<String, Object> queryMap) {
-        return generateRetrofit().create(ApiService.class)
-                .get(url, queryMap)
-                .compose(new HttpSchedulersTransformer<ResponseBody>());
+        return new GetRequest(url)
+                .setQueryMap(queryMap)
+                .excute();
     }
 
     /**
@@ -117,5 +112,9 @@ public class KHttp {
     public static Observable<ResponseBody> upload(String url, Map<String, RequestBody> map) {
         return generateRetrofit().create(ApiService.class)
                 .uploadFiles(url, map);
+    }
+
+    public <T> T createApi(Class<T> service) {
+        return generateRetrofit().create(service);
     }
 }
